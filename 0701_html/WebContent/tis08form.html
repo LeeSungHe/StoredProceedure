@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tis08form.html</title>
+    <style>
+        *{font-size: 24pt;}
+        /* #title_ch, #email_ch{margin-left: 80px; } */
+    </style>
+
+  
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+    
+    <script>
+        var gdata; //전역변수
+
+        function mycheck(){ //버튼에서 mycheck함수를 호출
+          var a=myform.title.value;
+          if(a=="" || a==null){
+              document.getElementById("title_ch").innerHTML="<font style='font-size:16pt;color:red'>*제목데이터입력하세요*</font>"; 
+              //alert("제목데이터 입력은 필수입니다");
+              myform.title.focus;
+              return ;
+          }else {
+            document.getElementById("title_ch").innerHTML="";
+            myform.email.focus();
+          }
+		 
+          var b=myform.email.value;
+          if(b=="" || b==null){
+              document.getElementById("email_ch").innerHTML="<font style='font-size:16pt;color:red'>*Email데이터입력하세요*</font>"; 
+              //alert("메일데이터 입력은 필수입니다");
+              myform.email.focus();
+              return ;
+          }else{
+            document.getElementById("email_ch").innerHTML="";
+          }
+        
+          var c=myform.pay.value;
+      	size = myform.pay.value.length;
+	            if (c=="" || c==null) {
+	  			alert("급여데이터가 공백입니다.");	
+	  			myform.pay.focus();
+	  			return;
+			}else if(size<5||size>5){
+				alert("급여데이터 자리수는 5글자입니다.");	
+	  			myform.pay.value="";
+	  			myform.pay.focus();
+	  			return;
+			}
+        }//mycheck end
+
+        
+        function paycheck(){//미사용
+        	var c=myform.pay.value;
+        	size = myform.pay.value.length;
+	            if (c=="" || c==null) {
+	  			alert("급여데이터가 공백입니다.");	
+	  			myform.pay.focus();
+	  			return;
+  			}
+	         	for (var i = 0; i < size; i++) {
+					if(c.charat(i)<'0'||c.charat(i)))
+					alert("숫자를 입력해야 합니다.");
+	         	}
+        }//paycheck end
+
+        
+        function idcheck(){
+
+        }//idcheck end
+
+        function emailcheck(){
+        	 var b=myform.email.value; //메일데이터
+         	 if(b=="" || b==null){
+         		document.getElementById("email_ch").innerHTML="<font style='font-size:12pt; color:red'>*메일데이터를 입력하세요*</font>";
+         		myform.emailfocus(); 
+         		return false;
+             }else{ //공백이 아닐때 정규식 
+            	var mail_reg=/^([a-zA-Z0-9-_\.]{2,12})@([a-zA-Z]{3,15})\.([a-zA-Z]{2,10})$/;
+                if(mail_reg.test(b)==false){
+                  document.getElementById("email_ch").innerHTML="<font style='font-size:12pt; color:red'>*sky@nate.com형식으로 입력하세요*</font>";
+                  myform.email.value="";
+                  myform.email.focus();
+                }else{
+                	document.getElementById("email_ch").innerHTML="";
+                	return false;
+                }
+             }
+        }//end
+
+        
+        
+        function jusocheck() {
+	      new daum.Postcode({
+	        oncomplete: function(data) {
+	            var fullAddr = '';
+	            var extraAddr = '';
+	            
+	            if (data.userSelectedType === 'R') fullAddr = data.roadAddress;
+	            else fullAddr = data.jibunAddress;
+
+	            if(data.userSelectedType === 'R') {
+	                if(data.bname !== '') extraAddr += data.bname;
+	                if(data.buildingName !== '') extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	                
+	                fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+	            }
+
+               document.getElementById('jusocode').value = data.zonecode; //5자리 새우편번호 사용
+	           //document.getElementById("jusocode").value = data.postcode;
+	           document.getElementById("juso1").value = fullAddr;
+	           document.getElementById("juso2").focus();
+	         }
+	       }).open();
+    	} //execDaumPostcode end==================================================
+    </script>
+</head>
+<body>
+    <p></p>
+    <form method="GET" name="myform">
+       제목: <input type="text" name="title" id="title" value="raining"  onblur="mycheck()"> <span id="title_ch"></span> <br>
+       메일: <input type="text" name="email" id="email"  value="test@tis.co.kr" onblur="mycheck()"> <span id="email_ch"></span> <br>
+       급여: <input type="text" name="pay" id="pay"><br>
+       우편: <input type="text" name="jusocode" id="jusocode"   size="10"> 
+             <input type="button" onClick="jusocheck()"  value="우편번호">  <br>
+       주소: <input type="text" name="juso1"  id="juso1"> <br>
+       상세: <input type="text" name="juso2"  id="juso2" value="이화빌딩 2층 tis"> <br>
+       파일: <input type="file" name="fileup"> <p></p>
+
+        <input type="button" onclick="javascript:mycheck();" value="게시판등록"> &nbsp;
+        <input type="reset" value="입력취소">
+    </form>
+    
+</body>
+</html>
+
+
+
+
+
+
+

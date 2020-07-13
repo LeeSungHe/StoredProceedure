@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tis08Form</title>
+    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+    <style>
+        *{font-size: 20px;}
+    </style>
+    <script>
+        
+        var gdata;
+        function mycheck() {
+            var a = myform.title.value;
+            if(a==""||a==null){
+                alert("필수 입력 데이터 제목을 입력하세요");
+                myform.title.focus();
+
+            }else{myform.email.focus()}
+            var b = myform.email.value;
+            var c = document.getElementById("email").value;
+            if(b==""||b==null){
+                alert("필수 입력 데이터 email을 입력하세요");
+                myform.email.focus();
+
+            }else{myform.jusocode.focus()}
+            
+        }
+        function idCheck() {
+            
+        }
+        function emailCheck() {
+            
+        }
+        //다음우편번호
+	function jusocheck() {
+	    new daum.Postcode({
+	        oncomplete: function(data) {
+	            var fullAddr = '';
+	            var extraAddr = '';
+	            
+	            if (data.userSelectedType === 'R') fullAddr = data.roadAddress;
+	            else fullAddr = data.jibunAddress;
+
+	            if(data.userSelectedType === 'R') {
+	                if(data.bname !== '') extraAddr += data.bname;
+	                if(data.buildingName !== '') extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	                
+	                fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+	            }
+
+               document.getElementById('jusocode').value = data.zonecode; //5자리 새우편번호 사용
+	           //document.getElementById("jusocode").value = data.postcode;
+	           document.getElementById("juso1").value = fullAddr;
+	           document.getElementById("juso2").focus();
+	        }
+	    }).open();
+	} //execDaumPostcode end==================================================
+    </script>
+</head>
+<body>
+    <form action="#" name="myform"method="get">
+        제목 : <input type="text" name="title"><br>
+<!--         내용 : <textarea name="content" id="id" cols="23" rows="4"></textarea><br> -->
+        메일 : <input type="text" name="email" id="email"><br>
+        우편 : <input type=text name="jusocode" id="jusocode" size=10>
+         <input type=button value="우편번호" onclick="jusocheck();">
+         <br>
+        주소 : <input type=text name="juso1"  id="juso1"> <br>
+        상세 : <input type=text name="juso2"  id="juso2" value="이화빌딩 2층 tis"> <br>
+        파일 : <input type="file" name="file" ><br>
+        <input type="button" onclick="mycheck()" value="게시판 등록">&nbsp;
+        <input type="reset" value="등록취소">
+    </form>
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>LastProject</title>
+<style type="text/css">
+* {
+    font-family: 'Noto Sans CJK KR','Noto Sans KR','New Gulim',sans-serif;
+}
+div {
+    display: block;
+}
+b, h1, h2, h3, h4, h5, h6, strong, th {
+    font-weight: 500;
+}
+body {
+    overflow-y: scroll;
+    min-width: 320px;
+    color: #666;
+    font-size: 16px;
+    font-weight: 400;
+    word-break: break-all;
+    word-spacing: -1px;
+    letter-spacing: -.5px;
+    background-color: #fff;
+}
+strong {
+    font-weight: bold;
+}
+.form-filed .required {
+    display: inline-block;
+    color: #db0000;
+}
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+.h2 {
+    display: block;
+    font-size: 1.5em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+.card-mem {
+    position: relative;
+    width: 700px;
+    margin: 0 auto;
+    padding: 55px 70px 60px;
+    background: #fff;
+}
+.color04 {
+    color: #db0000!important;
+}
+
+.heading-depth01 .title {
+    color: #000;
+    font-size: 34px;
+    font-weight: 700;
+}
+.heading .title {
+    display: inline-block;
+    position: relative;
+    color: #222;
+    font-weight: 500;
+}
+
+.heading {
+    position: relative;
+}
+.heading-depth01 {
+    margin-bottom: 35px;
+}
+.alignC {
+    text-align: center!important;
+}
+.OL * {
+    outline: 0!important;
+}
+* {
+    vertical-align: baseline;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: none;
+    -moz-text-size-adjust: none;
+    -ms-text-size-adjust: none;
+    text-size-adjust: none;
+    list-style: none;
+    -webkit-tap-highlight-color: transparent;
+}
+fieldset {
+    display: block;
+    margin-inline-start: 2px;
+    margin-inline-end: 2px;
+    padding-block-start: 0.35em;
+    padding-inline-start: 0.75em;
+    padding-inline-end: 0.75em;
+    padding-block-end: 0.625em;
+    min-inline-size: min-content;
+    border-width: 2px;
+    border-style: groove;
+    border-color: threedface;
+    border-image: initial;
+}
+</style>
+</head>
+<body>
+<main id="content" class="content content-bg">
+	<div class="inner">
+		<div class="heading heading-depth01 alignC">
+			<h2 class="title">회원가입</h2>
+		</div>
+		<form id="memberVo" name="joinForm" action="/join.do" method="post">
+			<input type="hidden" name="vdiscrno" id="vdiscrno" />
+			<input type="hidden" name="discrhash" id="discrhash" />
+			<input type="hidden" name="ciscrhash" id="ciscrhash" />
+			<input type="hidden" name="zipcode" />
+			<input type="hidden" name="addr1" />
+			<input type="hidden" name="buildingno" />
+			<fieldset>
+				<legend>회원가입</legend>
+				<div class="card-mem">
+					<div class="caption">
+						<p class="color04">* 표시는 필수 입력 항목입니다.</p>
+					</div>
+					<div class="form-filed join">
+						<p>
+							이대서울병원 홈페이지 회원은 별도의 회원가입 절차 없이<br>
+							같은 아이디로 이대목동병원 홈페이지를 이용하실 수 있습니다.
+						</p>
+						<p>
+							<br>
+							<b>
+								*환자 본인 예약만 가능합니다.<br>
+								*만 14세 미만 소아청소년 회원가입시, 보호자(법적 대리인)의 본인 인증이 필요합니다.
+							</b>
+						</p>
+						<div class="item" style="position:relative">
+							<strong class="title">
+								<i class="required">
+									*
+									<span class="he">필수입력</span>
+								</i>
+								아이디
+							</strong>
+							<input type="text" name="joinId" class="input id" title="아이디" placeholder="영문포함 6글자 이상" required="required" style="width:85%" />
+							<span role="alert" class="validation idTxt" id="idTxt" style="top:35px"></span>
+						</div>
+						<div class="item">
+							<strong class="title">
+								<i class="required">
+									*
+									<span class="he">필수입력</span>
+								</i>
+								비밀번호
+							</strong>
+							<p style="margin-bottom: 10px;">
+								대문자, 소문자, 숫자 조합으로 8자리 이상 입력하시면 자동으로 ‘사용 가능’으로 바뀝니다.
+              </p>
+							<div style="position:relative">
+								<input type="password" name="pass" id="pass" class="input pass" title="비밀번호" placeholder="영문 대소문자+숫자 8자 이상" required="required" style="width:85%" />
+								<span role="alert" class="validation passTxt" id="passTxt"></span>
+							</div>
+							<div style="margin-top:5px;position:relative">
+								<input type="password" name="passChk" id="passChk"  class="input passChk" title="비밀번호" placeholder="영문 대소문자+숫자 8자 이상" required="required" style="width:85%" />
+								<span role="alert" class="validation passChkTxt" id="passChkTxt"></span>
+							</div>
+							<!-- error -->
+							<!-- <div>
+								<input type="password" class="input error" title="비밀번호 확인" required="">
+								<span role="alert" class="validation color04">일치하지 않음</span>
+							</div> -->
+							<!-- //error -->
+						</div>
+						<div class="row">
+							<div class="item">
+								<strong class="title">
+									<i class="required">
+										*
+										<span class="he">필수입력</span>
+									</i>
+									이름
+								</strong>
+								<input type="text" name="pt_name" id="pt_name" class="input" title="이름" placeholder="홍길동" required="required" maxlength="20" />
+							</div>
+							<div class="item">
+								<strong class="title">성별</strong>
+								<div class="formBtnGroup form-size03">
+									<input type="radio" id="gender1" name="gender" data-fe-wrap="button button-sizeL" data-fe-label="남성" title="title" value="M" />
+									<input type="radio" id="gender2" name="gender" data-fe-wrap="button button-sizeL" data-fe-label="여성" title="title" value="F" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="item">
+								<strong class="title">
+									<i class="required">
+										*
+										<span class="he">필수입력</span>
+									</i>
+									생년월일
+								</strong>
+								<input type="text" name="birth" class="input birth" title="생년월일" required="required" placeholder="1980년 3월 20일인 경우 : 19800320" maxlength="8" onkeydown="onlyNum(this);" />
+							</div>
+							<div class="item">
+								<strong class="title">내/외국인</strong>
+								<div class="formBtnGroup form-size02">
+									<input type="radio" id="foreign_yn1" name="foreign_yn" data-fe-wrap="button button-sizeL" data-fe-label="내국인" title="title" value="N" />
+									<input type="radio" id="foreign_yn2" name="foreign_yn" data-fe-wrap="button button-sizeL" data-fe-label="외국인" title="title" value="Y" />
+								</div>
+							</div>
+						</div>
+						</div>
+						</div>
+						</fieldset>
+						</form>
+						</div>
+						
+</main>
+</body>
+
+</html>
